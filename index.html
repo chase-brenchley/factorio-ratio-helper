@@ -1,29 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <script type="text/javascript">
-    	function addRecipe() {
-    		document.getElementById("recipes").hidden = false;
-    		document.getElementById("addRecipeButton").hidden = true;
-    	}
-    </script>
-  </head>
-  <body>
-<!--   	<p>What do you want to make</p><input type="number" name=""><input type="text" name="item"> per <select><option>sec</option><option>min</option><option>hour</option></select> in a(n) <input type="text" name="machine">
-  	</p> -->
-  	<p>
-  		<!-- Button to add recipe. Should disappear after clicked -->
-  		<button onclick="addRecipe()" id="addRecipeButton">Add Recipe</button>
-  	</p>
-  	<div id="recipes" hidden>
-  		<div class="recipe">
-	  		Name: <input type="text" name="" list="recipes"> Crafting time: <input type="number" name=""> Made in: <input type="text" name="" list="assemblers"><br>
-	  		<datalist id="recipes"><option>test</option></datalist>
-	  		<datalist id="assemblers"><option>Assembley Machine</option></datalist>
-	  		<button>Add component</button>
-  		</div>
-  	</div>
-  </body>
+
+<head>
+	<meta charset="UTF-8">
+	<title>title</title>
+	<style>
+		div.recipe .recipe{
+				background-color: pink;
+				margin-left: 2.5%;
+			}
+		</style>
+
+	<script type="text/javascript">
+		function addRecipe() {
+			document.getElementById("recipesDiv").hidden = false;
+			document.getElementById("addRecipeButton").hidden = true;
+			// document.getElementById("recipe1").focus();
+		}
+
+		function addComponent(button) {
+			console.log(button);
+			if (typeof addComponent.node == 'undefined') {
+				addComponent.node = button.parentNode.cloneNode(true)
+			}
+			button.parentNode.childNodes[3].appendChild(addComponent.node);
+			// button.hidden = true;
+		}
+	</script>
+</head>
+
+<body>
+	<p>
+		<!-- Button to add recipe. Should disappear after clicked -->
+		<button onclick="addRecipe()" id="addRecipeButton">Add Recipe (Enter)</button>
+	</p>
+	<div id="recipesDiv" hidden>
+		<div class="recipe">
+			<p>Name: <input type="text" id="" name="" list="recipes"> Crafting time: <input type="number" name=""> Made in:
+				<input type="text" name="" list="assemblers"></p>
+			<div id="recipe1Components">
+				<div class="recipe">
+					<p>Name: <input type="text" id="" name="" list="recipes"> Crafting time: <input type="number" name=""> Made in:
+						<input type="text" name="" list="assemblers"></p>
+					<div id="recipe1Components"></div>
+					<button onclick="addComponent(this)">Add component</button>
+				</div>
+			</div>
+			<button onclick="addComponent(this)">Add component</button>
+		</div>
+		<div id="datalists">
+			<datalist id="recipes">
+				<option>test</option>
+			</datalist>
+			<datalist id="assemblers">
+				<option>Assembley Machine</option>
+			</datalist>
+		</div>
+	</div>
+</body>
+
 </html>
